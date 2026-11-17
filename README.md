@@ -32,7 +32,8 @@ every car at once.)
 | App | Version | What it is |
 |---|---|---|
 | RideTube (fork) | app 0.4.0, service 0.4.2 | A modified build of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube), a YouTube client. Fixes the Search menu (which holds the settings) closing right after it opens; the service streams the video in RAM instead of writing it to the head unit's flash, and keeps a debug report. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source and changes: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube). |
-| CarLink (experimental) | 0.1.2 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Not yet tried in a car.** Source: `7amoody1985/carlink` (private). |
+| CarLink (experimental) | 0.1.3 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Not yet tried in a car.** Source: `7amoody1985/carlink` (private). |
+| Android Auto log (for CarLink) | tool 0.1.0 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
 
 **Moved here from 7amoody1985/mgu-apps (2026-11-17), ids unchanged.** The Store won't install a catalog package
 over an app another source installed: if the car has either installed from `mgu-apps`, uninstall it (the RideTube
@@ -51,7 +52,12 @@ app, then its service) and install it again from this source. RideTube needs a Y
 - **Debug mode** (0.1.1): the phone app's Car log screen reads this app's log file, its live log and a status
   snapshot (the phone link, the route, cluster-render's layers and targets) over the same link. Since 0.1.2
   also the RideTube fork service's debug report (`status.json` and its recent plays from `sessions.jsonl`),
-  when that service is installed; neither holds what was watched.
+  when that service is installed; neither holds what was watched. (0.1.3: from `mdq-ridetube-d`.)
+- **Android Auto** (0.1.3, with the tool **Android Auto log (for CarLink)**, `mdq-aapd-log`): the Car log shows
+  the car's Android Auto daemon (`aapd`): its journal (the last 2000 lines), whether it runs and listens, what
+  waze-on-cluster's patch changed and how `/etc/aapd.conf` differs from its backup. The tool runs as root but
+  only reads; it writes only `/run/mdq-aapd-log`, which goes when it stops or is removed. It starts at the next
+  head-unit start after its install.
 
 ### RideTube (fork)
 

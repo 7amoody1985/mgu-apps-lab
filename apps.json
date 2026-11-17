@@ -42,7 +42,7 @@
       "title": "CarLink (experimental)",
       "description": "Experimental. The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget, sent by the CarLink phone app over the car's Wi-Fi. Demo shows it without the phone. Needs cluster-render from the robertnisipeanu/idrive-apps source.",
       "author": "7amoody1985",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "requires": {
         "cluster-render": "0.4.0"
       },
@@ -51,6 +51,18 @@
         "ID7"
       ],
       "icon": "mdq_carlink.png"
+    },
+    {
+      "id": "mdq-aapd-log",
+      "kind": "tool",
+      "title": "Android Auto log (for CarLink)",
+      "description": "Experimental. Copies the car's Android Auto daemon's log (journalctl -u aapd, the last 2000 lines) and a snapshot of its state (systemctl status, waze-on-cluster's aapd patch, /etc/aapd.conf against its backup) to /run/mdq-aapd-log, where CarLink shows it on the phone (Car log, Debug on). Runs as root but only reads; writes only that folder, which goes when it stops. Starts at the next head-unit start after its install.",
+      "author": "7amoody1985",
+      "version": "0.1.0",
+      "uninstallable": true,
+      "mguHmi": [
+        "ID7"
+      ]
     }
   ]
 }
