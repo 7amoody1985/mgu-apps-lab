@@ -1,7 +1,5 @@
 # Builds dist/ from apps.json (tools/make_catalog.py) and uploads it as the assets of the GitHub release
 # tagged `catalog`, creating that release the first time. Old assets that are no longer listed are deleted.
-# This repository is private: the packages and icons go up first, then catalog.json, written with their API URLs
-# (make_catalog.py --private), which the car downloads with its token.
 #   powershell -File tools\publish.ps1
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
@@ -11,24 +9,19 @@ Set-Location $root
 
 python -I tools/make_catalog.py
 if ($LASTEXITCODE -ne 0) { throw 'make_catalog.py failed' }
-$files = Get-ChildItem dist -File | Where-Object { $_.Name -ne 'catalog.json' } | ForEach-Object { $_.FullName }
+$files = Get-ChildItem dist -File | ForEach-Object { $_.FullName }
 
 # (a list, not `release view`: its "release not found" on stderr stops Windows PowerShell 5.1 here)
 $tags = @(& $gh release list --limit 100 --json tagName --jq '.[].tagName')
 if ($LASTEXITCODE -ne 0) { throw 'gh release list failed' }
 if ($tags -notcontains 'catalog') {
-    & $gh release create catalog --title 'Store catalog' --notes 'The MGU Store reads catalog.json from this release (a private source: the car needs a GitHub token, Settings > Accounts).' $files
+    & $gh release create catalog --title 'Store catalog' --notes 'The MGU Store reads catalog.json from this release. A test source, not for general use: see the README.' $files
     if ($LASTEXITCODE -ne 0) { throw 'gh release create failed' }
 } else {
     & $gh release upload catalog $files --clobber
     if ($LASTEXITCODE -ne 0) { throw 'gh release upload failed' }
+    $keep = Get-ChildItem dist -File | ForEach-Object { $_.Name }
+    $have = & $gh release view catalog --json assets --jq '.assets[].name'
+    foreach ($a in $have) { if ($keep -notcontains $a) { & $gh release delete-asset catalog $a --yes } }
 }
-# the catalog, with the URLs the uploads just got
-python -I tools/make_catalog.py --private
-if ($LASTEXITCODE -ne 0) { throw 'make_catalog.py --private failed' }
-& $gh release upload catalog (Join-Path $root 'dist\catalog.json') --clobber
-if ($LASTEXITCODE -ne 0) { throw 'gh release upload of catalog.json failed' }
-$keep = Get-ChildItem dist -File | ForEach-Object { $_.Name }
-$have = & $gh release view catalog --json assets --jq '.assets[].name'
-foreach ($a in $have) { if ($keep -notcontains $a) { & $gh release delete-asset catalog $a --yes } }
 Write-Host 'published: the Store sees it at its next check (Settings > Check now)'

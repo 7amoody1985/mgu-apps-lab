@@ -1,31 +1,24 @@
 # 7amoody1985's MGU lab
 
-A **private** source for the [MGU Store](https://github.com/robertnisipeanu/mgu-store) on BMW iDrive 7 head units
-(MGU), for my own car: apps that are personal and very experimental. The released ones are in the public source
-[7amoody1985/mgu-apps](https://github.com/7amoody1985/mgu-apps). Unofficial: nothing here is made, endorsed or
-supported by BMW AG.
+> [!CAUTION]
+> **This is my test area, not an app source for general use.** It holds personal, very experimental apps for BMW
+> iDrive 7 head units (MGU) that I try on my own car (a G05 X5). They may not work, may break your head unit's
+> setup, and can change or disappear without notice. There's no support, and nothing here comes with a warranty.
+> Please don't add this source to your car unless you know what you're doing and can recover the head unit
+> yourself. Apps I consider ready are in [7amoody1985/mgu-apps](https://github.com/7amoody1985/mgu-apps).
 
-> [!WARNING]
-> Everything here is experimental and for my own use: tried on one car (a G05 X5 with iDrive 7) or not tried in a
-> car at all, with no warranty or support. Use it parked.
+The repository is public so that my own car can read it without a token. You're welcome to read the code, and if
+you're a developer and something here is useful to you, feel free to build on it. The RideTube fork stays under its
+own licence (GPL-3.0-or-later, see below).
 
-## Add it to a car
+Unofficial: nothing here is made, endorsed or supported by BMW AG, Google or JustAnotherPU.
 
-The repository is private, so the car needs a token that can read it: **one token per car**, so one car can be cut
-off without the others.
+## Add it to a car (for my own cars)
 
-1. **Make the car's token** on github.com: your picture → **Settings** → **Developer settings** → **Personal access
-   tokens** → **Fine-grained tokens** → **Generate new token**. Name it after the car, **Expiration**: *No
-   expiration*, **Repository access**: *Only select repositories* → `mgu-apps-lab`, **Permissions**: **Contents**,
-   *Read-only*. Generate, and copy it (`github_pat_…`; GitHub shows it once).
-2. **Give it to the car** (no typing on the iDrive): in the Store, Settings → **Phone access** → **On**; scan the
-   QR code with the phone on the car's hotspot, and add the token on the page that opens (Accounts → Add token).
-   Turn Phone access off when done.
-3. **Add the source**: Settings → **Add source**, `7amoody1985/mgu-apps-lab`, **Releases**. Then **Check now**.
-
-**To cut a car off:** delete its token on github.com (Settings → Developer settings → Fine-grained tokens). Only that
-car loses the source; what it has installed keeps running. (Sign in with GitHub works too, but revoking it signs out
-every car at once.)
+In the [MGU Store](https://github.com/robertnisipeanu/mgu-store): **Settings → Add source**,
+`7amoody1985/mgu-apps-lab`, **Releases**, then **Check now**. No token is needed since the repository went public
+(2026-11-18). A car that was set up with a token can keep it, or you can delete the token on github.com
+(Settings → Developer settings → Fine-grained tokens).
 
 ## Apps
 
