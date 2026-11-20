@@ -56,9 +56,9 @@
       "id": "mdq-aapd-log",
       "kind": "tool",
       "title": "Android Auto log (for CarLink)",
-      "description": "Experimental. Copies the car's Android Auto daemon's log (journalctl -u aapd, the last 2000 lines) and a snapshot of its state (systemctl status, waze-on-cluster's aapd patch, /etc/aapd.conf against its backup, and the network: addresses, routes and the firewall rules) to /run/mdq-aapd-log, where CarLink shows it on the phone (Car log, Debug on). Runs as root but only reads; writes only that folder, which goes when it stops. Starts at the next head-unit start after its install.",
+      "description": "Experimental. Copies the car's Android Auto daemon's log (journalctl -u aapd, the last 2000 lines) and a snapshot of its state, taken again when aapd starts or stops (systemctl status, waze-on-cluster's aapd patch, /etc/aapd.conf whole and against its backup, the network and its firewall, and what may keep Android Auto out of the iDrive menu: the boot journal's lines about Android Auto from every service, the coding and variant services and their files, by name; any VIN redacted) to /run/mdq-aapd-log, where CarLink shows it on the phone (Car log, Debug on). Runs as root but only reads; writes only that folder, which goes when it stops. Starts at the next head-unit start after its install.",
       "author": "7amoody1985",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "uninstallable": true,
       "mguHmi": [
         "ID7"
