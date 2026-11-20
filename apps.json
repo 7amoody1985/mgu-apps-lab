@@ -4,11 +4,11 @@
       "id": "mdq_ridetube",
       "kind": "app",
       "title": "RideTube (fork by 7amoody1985)",
-      "description": "TEST COPY of JustAnotherPU's RideTube 0.4.5 (github.com/JustAnotherPU/ridetube), not endorsed by its developer, under its own ids: it installs beside the original and never over it (one plays at a time). Its service streams the video in RAM instead of writing it to flash (the change offered to JustAnotherPU), and the setting 'Stream stats over the video' shows RAM, buffer and network while a video plays. Source: github.com/7amoody1985/ridetube, branch lab-ram",
+      "description": "TEST COPY of JustAnotherPU's RideTube 0.4.5 (github.com/JustAnotherPU/ridetube), not endorsed by its developer, under its own ids: it installs beside the original and never over it (one plays at a time). Its service streams the video in RAM instead of writing it to flash (the change offered to JustAnotherPU), and the setting 'Stream stats over the video' shows RAM, buffer, network and the picture's frame rate (freezes) while a video plays. Source: github.com/7amoody1985/ridetube, branch lab-ram",
       "author": "JustAnotherPU, modified by 7amoody1985",
-      "version": "0.4.5",
+      "version": "0.4.6",
       "requires": {
-        "mdq-ridetube-d": "0.4.3",
+        "mdq-ridetube-d": "0.4.5",
         "mgu-render": "0.6.11",
         "mgu-inputgate": "1.0.0"
       },
@@ -22,9 +22,9 @@
       "id": "mdq-ridetube-d",
       "kind": "tool",
       "title": "RideTube service (fork by 7amoody1985)",
-      "description": "The service of the RideTube test copy (JustAnotherPU's 0.4.2, modified, with its own ids): yt-dlp fetches on the car, the sound through the BMW MediaPlayer, the picture decoded by ytdec. The playing video streams in RAM (a 256 MB tmpfs) instead of being written whole to flash; seeks, resumes and dropped links fetch from the fragment they need. For CarLink's Car log: /run/mdq-ridetube-d/log.txt (its log, redacted) and status.json. Needs Node.js 22 (jap-node22) from the JustAnotherPU/mgu-apps source. Source: github.com/7amoody1985/ridetube, branch lab-ram",
+      "description": "The service of the RideTube test copy (JustAnotherPU's 0.4.2, modified, with its own ids): yt-dlp fetches on the car, the sound through the BMW MediaPlayer, the picture decoded by ytdec. The playing video streams in RAM (a 256 MB tmpfs) instead of being written whole to flash; seeks, resumes and dropped links fetch from the fragment they need. Downloads keep one connection open. For CarLink's Car log: /run/mdq-ridetube-d/log.txt (its log, redacted, with 'LAB frames:' lines when the picture freezes while the sound plays on) and status.json. Needs Node.js 22 (jap-node22) from the JustAnotherPU/mgu-apps source. Source: github.com/7amoody1985/ridetube, branch lab-ram",
       "author": "JustAnotherPU, modified by 7amoody1985",
-      "version": "0.4.4",
+      "version": "0.4.5",
       "requires": {
         "mgu-deploy": "0.7.0",
         "mgu-python": "1.0.2",
