@@ -22,9 +22,9 @@
       "id": "mdq-ridetube-d",
       "kind": "tool",
       "title": "RideTube service (fork by 7amoody1985)",
-      "description": "The service of the RideTube test copy (JustAnotherPU's 0.4.2, modified, with its own ids): yt-dlp fetches on the car, the sound through the BMW MediaPlayer, the picture decoded by ytdec. The playing video streams in RAM (a 256 MB tmpfs) instead of being written whole to flash; seeks, resumes and dropped links fetch from the fragment they need. Needs Node.js 22 (jap-node22) from the JustAnotherPU/mgu-apps source. Source: github.com/7amoody1985/ridetube, branch lab-ram",
+      "description": "The service of the RideTube test copy (JustAnotherPU's 0.4.2, modified, with its own ids): yt-dlp fetches on the car, the sound through the BMW MediaPlayer, the picture decoded by ytdec. The playing video streams in RAM (a 256 MB tmpfs) instead of being written whole to flash; seeks, resumes and dropped links fetch from the fragment they need. For CarLink's Car log: /run/mdq-ridetube-d/log.txt (its log, redacted) and status.json. Needs Node.js 22 (jap-node22) from the JustAnotherPU/mgu-apps source. Source: github.com/7amoody1985/ridetube, branch lab-ram",
       "author": "JustAnotherPU, modified by 7amoody1985",
-      "version": "0.4.3",
+      "version": "0.4.4",
       "requires": {
         "mgu-deploy": "0.7.0",
         "mgu-python": "1.0.2",

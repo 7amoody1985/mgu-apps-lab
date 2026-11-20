@@ -24,7 +24,7 @@ In the [MGU Store](https://github.com/robertnisipeanu/mgu-store): **Settings →
 
 | App | Version | What it is |
 |---|---|---|
-| RideTube (fork) | app 0.4.5, service 0.4.3 | A **test copy** of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube) 0.4.5, a YouTube client: its service streams the video in RAM instead of writing it to the head unit's flash (the change offered to JustAnotherPU), with a stats overlay to watch it. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`. |
+| RideTube (fork) | app 0.4.5, service 0.4.4 | A **test copy** of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube) 0.4.5, a YouTube client: its service streams the video in RAM instead of writing it to the head unit's flash (the change offered to JustAnotherPU), with a stats overlay to watch it. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`. |
 | CarLink (experimental) | 0.1.5 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
 | Android Auto log (for CarLink) | tool 0.1.1 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
 
@@ -78,9 +78,11 @@ app, then its service) and install it again from this source. RideTube needs a Y
   the full-screen player while a video plays: where it is held and the RAM disk's use, seconds fetched ahead and
   kept behind, MB downloaded and the link, restarts and stalls, the head unit's free memory and swap, the
   decoder's and fetcher's memory, the load. Asked every 2 s, only while it shows.
-- **No debug report files any more** (`status.json`, `sessions.jsonl` of the earlier fork): CarLink's Car log
-  finds no RideTube report with this copy. The service's log: `ssh root@172.16.222.97 journalctl -u
-  mdq-ridetube-d -n 300 --no-pager`.
+- **For CarLink's Car log** (service 0.4.4): every 10 s while RideTube is in use, `/run/mdq-ridetube-d/status.json`
+  (the overlay's numbers) and `/run/mdq-ridetube-d/log.txt` (the service's recent log and the decoder's, redacted as
+  RideTube's own log reports are: no tokens, titles, video ids or addresses). In RAM, readable by other apps, gone
+  when the service stops. The earlier fork's `sessions.jsonl` is gone. Over the hotspot:
+  `ssh root@172.16.222.97 cat /run/mdq-ridetube-d/log.txt`.
 - Licence: GPL-3.0-or-later, as the original (the licence texts are in the packages); the source of this build is
   [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`, its packages made with its
   `tools/lab_build.sh` (JustAnotherPU's ytdec and yt-dlp from his published service package).
