@@ -25,7 +25,7 @@ In the [MGU Store](https://github.com/robertnisipeanu/mgu-store): **Settings →
 | App | Version | What it is |
 |---|---|---|
 | RideTube (fork) | app 0.4.5, service 0.4.4 | A **test copy** of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube) 0.4.5, a YouTube client: its service streams the video in RAM instead of writing it to the head unit's flash (the change offered to JustAnotherPU), with a stats overlay to watch it. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`. |
-| CarLink (experimental) | 0.1.5 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
+| CarLink (experimental) | 0.1.6 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
 | Android Auto log (for CarLink) | tool 0.1.1 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
 
 **Moved here from 7amoody1985/mgu-apps (2026-11-17), ids unchanged.** The Store won't install a catalog package
@@ -37,7 +37,8 @@ app, then its service) and install it again from this source. RideTube needs a Y
 - **Status: early.** First tried in a car on 2026-11-20: the car-calls-phone link and debug mode work; the turn
   card on the cluster from a live route isn't confirmed yet. Open CarLink on the car once after each head-unit
   start (the head unit only starts it briefly at boot). 0.1.5: the whole Android Auto snapshot in debug mode,
-  and the RideTube report names the service it found.
+  and the RideTube report names the service it found. 0.1.6: the RideTube fork service's stream stats and its log
+  (`log.txt`) in debug mode (CarLink on the phone 0.5.2 shows them).
 - It shows what the CarLink phone app sends: that app reads the navigation notification of HudHud or Google
   Maps and draws the turn card (arrow, distance, street, arrival time). The phone app isn't published yet.
 - **The link** (0.1.4): with the car on the phone's hotspot (the Store's Wi-Fi uplink), the car app calls the
@@ -49,8 +50,9 @@ app, then its service) and install it again from this source. RideTube needs a Y
 - Settings: show on the cluster (on), on the HUD (off), and how long a quiet phone may be before the card goes.
 - **Debug mode** (0.1.1): the phone app's Car log screen reads this app's log file, its live log and a status
   snapshot (the phone link, the route, cluster-render's layers and targets) over the same link. Since 0.1.2
-  also the RideTube fork service's debug report (`status.json` and its recent plays from `sessions.jsonl`),
-  when that service is installed; neither holds what was watched. (0.1.3: from `mdq-ridetube-d`.)
+  also the RideTube fork service's debug report, when that service is installed: since 0.1.6 its `status.json`
+  (the stream stats) and `log.txt` (its log, redacted by the service), from `/run/mdq-ridetube-d` (service 0.4.4
+  and later); neither holds what was watched.
 - **Android Auto** (0.1.3, with the tool **Android Auto log (for CarLink)**, `mdq-aapd-log`): the Car log shows
   the car's Android Auto daemon (`aapd`): its journal (the last 2000 lines), whether it runs and listens, what
   waze-on-cluster's patch changed and how `/etc/aapd.conf` differs from its backup; since the tool's 0.1.1 also
