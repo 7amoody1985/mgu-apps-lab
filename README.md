@@ -24,7 +24,7 @@ In the [MGU Store](https://github.com/robertnisipeanu/mgu-store): **Settings →
 
 | App | Version | What it is |
 |---|---|---|
-| RideTube (fork) | app 0.4.0, service 0.4.2 | A modified build of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube), a YouTube client. Fixes the Search menu (which holds the settings) closing right after it opens; the service streams the video in RAM instead of writing it to the head unit's flash, and keeps a debug report. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source and changes: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube). |
+| RideTube (fork) | app 0.4.5, service 0.4.3 | A **test copy** of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube) 0.4.5, a YouTube client: its service streams the video in RAM instead of writing it to the head unit's flash (the change offered to JustAnotherPU), with a stats overlay to watch it. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`. |
 | CarLink (experimental) | 0.1.5 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
 | Android Auto log (for CarLink) | tool 0.1.1 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
 
@@ -60,22 +60,30 @@ app, then its service) and install it again from this source. RideTube needs a Y
 
 ### RideTube (fork)
 
-- **Status: the service's RAM streaming is not yet tried in a car.** Tested on a PC: its tests, and a live
-  streaming check against YouTube.
+- **Status: a test copy, not yet tried in a car.** Since 2026-11-20 it is JustAnotherPU's RideTube 0.4.5 (app) and
+  0.4.2 (service) with one change, the video through RAM, which is offered to him as a pull request under his own
+  ids. Tested on a PC: every test of his, the new ones, and a live streaming check against YouTube. The earlier fork
+  (0.4.0 / 0.4.2, with the Search menu fix he has since made himself) is replaced; the Store updates it in place.
 - **Its own ids:** the app is `mdq_ridetube` (the tile says "RideTube (fork)"), its service `mdq-ridetube-d`.
   It installs beside JustAnotherPU's RideTube (`jap_ridetube`, `jap-ridetube-d`) and never over it; both can be
   installed, but only one plays at a time. Keep `JustAnotherPU/mgu-apps:releases`: Node.js 22 (`jap-node22`)
   comes from it.
-- **The video in RAM:** the service mounts a 256 MB RAM disk and keeps only about two and a half minutes of the
-  playing video in it, instead of writing the whole video to flash. Seeking back more than 45 s fetches it again
-  (a short pause). Videos it can't stream that way (very long ones, about 90 minutes and up) go to flash as before.
-- **Debug report:** `/run/mdq-ridetube-d/status.json` (RAM, memory, the stream, refreshed every 10 s while in use)
-  and `/var/opt/mdq-ridetube-d/log/sessions.jsonl` (one line a play). Neither holds what you watched. Over the
-  car's hotspot: `ssh root@172.16.222.97 cat /run/mdq-ridetube-d/status.json`. The fields:
-  [the service's README](https://github.com/7amoody1985/ridetube/blob/main/native/mdq-ridetube-d/README.md).
+- **The video in RAM:** the service mounts a 256 MB RAM disk and keeps about two and a half minutes of the playing
+  video in it (120 s ahead, 45 s behind), instead of writing the whole video to flash. A seek outside that, a
+  resume, a quality change or a link that was gone a while fetch the video again from the fragment holding that
+  point (a few seconds, never the video from its start); the sound plays on meanwhile. A dropped link is tried
+  again for as long as the video plays. Videos it can't stream that way (very long ones, about 90 minutes and up)
+  go to flash as before.
+- **Stream stats overlay** (Settings, "Stream stats over the video", off by default): a panel at the top right of
+  the full-screen player while a video plays: where it is held and the RAM disk's use, seconds fetched ahead and
+  kept behind, MB downloaded and the link, restarts and stalls, the head unit's free memory and swap, the
+  decoder's and fetcher's memory, the load. Asked every 2 s, only while it shows.
+- **No debug report files any more** (`status.json`, `sessions.jsonl` of the earlier fork): CarLink's Car log
+  finds no RideTube report with this copy. The service's log: `ssh root@172.16.222.97 journalctl -u
+  mdq-ridetube-d -n 300 --no-pager`.
 - Licence: GPL-3.0-or-later, as the original (the licence texts are in the packages); the source of this build is
-  [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), its packages made with its
-  `tools/build_app.sh` and `tools/build_service.sh`.
+  [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`, its packages made with its
+  `tools/lab_build.sh` (JustAnotherPU's ytdec and yt-dlp from his published service package).
 
 ## Adding an app
 

@@ -42,9 +42,10 @@ The car reads `catalog.json` from the GitHub release tagged `catalog`; that file
 - Commit packages, `dist\` or anything holding BMW's SDK.
 - Put a token, key, VIN or anything else private in any file or release asset here: the repository is public.
 - Remove the README's warning that this is a test source, not for general use.
-- Change how the `mdq_ridetube` / `mdq-ridetube-d` packages are made: they come from the RideTube fork
-  (https://github.com/7amoody1985/ridetube, checkout `..\ridetube`), its `tools/build_app.sh` and
-  `tools/build_service.sh`.
+- Change how the `mdq_ridetube` / `mdq-ridetube-d` packages are made: since 2026-11-20 they come from the RideTube
+  fork's branch `lab-ram` (https://github.com/7amoody1985/ridetube, checkout `..\ridetube`), its
+  `tools/lab_build.sh` (JustAnotherPU's RideTube with the RAM streaming and the stats overlay, renamed to the
+  `mdq` ids in a copy). The fork's branch `ram-streaming` keeps his ids: it is the pull request, never built here.
 - List an app here that the public source `mgu-apps` also lists.
 - Re-create or rename the `catalog` release, or publish it as a draft or prerelease: the Store reads only a
   published release named exactly `catalog`.
