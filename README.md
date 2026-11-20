@@ -25,8 +25,8 @@ In the [MGU Store](https://github.com/robertnisipeanu/mgu-store): **Settings →
 | App | Version | What it is |
 |---|---|---|
 | RideTube (fork) | app 0.4.5, service 0.4.4 | A **test copy** of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube) 0.4.5, a YouTube client: its service streams the video in RAM instead of writing it to the head unit's flash (the change offered to JustAnotherPU), with a stats overlay to watch it. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube), branch `lab-ram`. |
-| CarLink (experimental) | 0.1.6 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
-| Android Auto log (for CarLink) | tool 0.1.2 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
+| CarLink (experimental) | 0.1.7 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
+| Android Auto log (for CarLink) | tool 0.1.3 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
 
 **Moved here from 7amoody1985/mgu-apps (2026-11-17), ids unchanged.** The Store won't install a catalog package
 over an app another source installed: if the car has either installed from `mgu-apps`, uninstall it (the RideTube
@@ -38,7 +38,7 @@ app, then its service) and install it again from this source. RideTube needs a Y
   card on the cluster from a live route isn't confirmed yet. Open CarLink on the car once after each head-unit
   start (the head unit only starts it briefly at boot). 0.1.5: the whole Android Auto snapshot in debug mode,
   and the RideTube report names the service it found. 0.1.6: the RideTube fork service's stream stats and its log
-  (`log.txt`) in debug mode (CarLink on the phone 0.5.2 shows them).
+  (`log.txt`) in debug mode (CarLink on the phone 0.5.2 shows them). 0.1.7: the Android Auto tool 0.1.3's live lines.
 - It shows what the CarLink phone app sends: that app reads the navigation notification of HudHud or Google
   Maps and draws the turn card (arrow, distance, street, arrival time). The phone app isn't published yet.
 - **The link** (0.1.4): with the car on the phone's hotspot (the Store's Wi-Fi uplink), the car app calls the
@@ -60,7 +60,11 @@ app, then its service) and install it again from this source. RideTube needs a Y
   every 15 s; 0.1.1's snapshot was taken once, often before aapd started, and wrongly said it wasn't running), the
   snapshot again when that changes, and what may keep Android Auto out of the iDrive menu (FSC, coding, region,
   variant): the boot journal's lines about Android Auto from every service, the coding and variant services and
-  their files (by name; small text ones whole, any VIN redacted), the whole `/etc/aapd.conf`. The tool runs as root but
+  their files (by name; small text ones whole, any VIN redacted), the whole `/etc/aapd.conf`. Since 0.1.3 (with
+  CarLink 0.1.7): every service's journal lines about Android Auto and its Bluetooth side, kept as they come (the
+  car's journal holds only about an hour), the head unit's coding (`/dev/shm/rawcodingdata`, hex, VIN masked, to
+  compare reports around a coding change) and the variant registries' strings about Android Auto / CarPlay /
+  CarLife. The tool runs as root but
   only reads; it writes only `/run/mdq-aapd-log`, which goes when it stops or is removed. It starts at the next
   head-unit start after its install.
 
