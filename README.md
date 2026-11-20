@@ -25,7 +25,7 @@ In the [MGU Store](https://github.com/robertnisipeanu/mgu-store): **Settings →
 | App | Version | What it is |
 |---|---|---|
 | RideTube (fork) | app 0.4.0, service 0.4.2 | A modified build of [JustAnotherPU's RideTube](https://github.com/JustAnotherPU/ridetube), a YouTube client. Fixes the Search menu (which holds the settings) closing right after it opens; the service streams the video in RAM instead of writing it to the head unit's flash, and keeps a debug report. Not endorsed by the original developer. Its own ids (`mdq_ridetube`, `mdq-ridetube-d`): it installs beside the original. Source and changes: [7amoody1985/ridetube](https://github.com/7amoody1985/ridetube). |
-| CarLink (experimental) | 0.1.4 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Not yet tried in a car.** Source: `7amoody1985/carlink` (private). |
+| CarLink (experimental) | 0.1.5 | The next turn from HudHud or Google Maps on your phone, in the middle of the instrument cluster and as a home-screen widget. **Early: the link and debug mode tried in one car so far.** Source: `7amoody1985/carlink` (private). |
 | Android Auto log (for CarLink) | tool 0.1.1 | The car's Android Auto daemon's log and state, for CarLink's Car log on the phone. Experimental, a debugging aid. |
 
 **Moved here from 7amoody1985/mgu-apps (2026-11-17), ids unchanged.** The Store won't install a catalog package
@@ -34,7 +34,10 @@ app, then its service) and install it again from this source. RideTube needs a Y
 
 ### CarLink (experimental)
 
-- **Status: first version, not yet tried in a car.** Tested on a PC in the kit's emulator only.
+- **Status: early.** First tried in a car on 2026-11-20: the car-calls-phone link and debug mode work; the turn
+  card on the cluster from a live route isn't confirmed yet. Open CarLink on the car once after each head-unit
+  start (the head unit only starts it briefly at boot). 0.1.5: the whole Android Auto snapshot in debug mode,
+  and the RideTube report names the service it found.
 - It shows what the CarLink phone app sends: that app reads the navigation notification of HudHud or Google
   Maps and draws the turn card (arrow, distance, street, arrival time). The phone app isn't published yet.
 - **The link** (0.1.4): with the car on the phone's hotspot (the Store's Wi-Fi uplink), the car app calls the
