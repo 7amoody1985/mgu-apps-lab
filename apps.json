@@ -56,9 +56,9 @@
       "id": "mdq-aapd-log",
       "kind": "tool",
       "title": "Android Auto log (for CarLink)",
-      "description": "Experimental. Copies the car's Android Auto daemon's log (journalctl -u aapd, the last 2000 lines) and a snapshot of its state, taken again when aapd starts or stops (systemctl status, waze-on-cluster's aapd patch, /etc/aapd.conf whole and against its backup, the network and its firewall, and what may keep Android Auto out of the iDrive menu: the boot journal's lines about Android Auto from every service, the coding and variant services and their files, by name, the head unit's coding as hex and the variant registries' strings about Android Auto / CarPlay / CarLife; any VIN redacted), and every service's journal lines about Android Auto as they come (the car's journal keeps only about an hour), to /run/mdq-aapd-log, where CarLink shows it on the phone (Car log, Debug on). Runs as root but only reads; writes only that folder, which goes when it stops. Starts at the next head-unit start after its install.",
+      "description": "Experimental. Copies the car's Android Auto daemon's log (journalctl -u aapd, the last 2000 lines) and a snapshot of its state, taken again when aapd starts or stops (systemctl status, waze-on-cluster's aapd patch, /etc/aapd.conf whole and against its backup, the network and its firewall, and what may keep Android Auto out of the iDrive menu: the boot journal's lines about Android Auto from every service, the coding and variant services and their files, by name, the head unit's coding as hex and the variant registries' strings about Android Auto / CarPlay / CarLife; any VIN redacted), every service's journal lines about Android Auto as they come (the car's journal keeps only about an hour), and since 0.1.4, once a start at the lowest priority, which program reads /etc/ConnVariants.cfg and the key names it holds, which programs mention Android Auto or its wireless Bluetooth service, and the process list, to /run/mdq-aapd-log, where CarLink shows it on the phone (Car log, Debug on). Runs as root but only reads; writes only that folder, which goes when it stops. Starts at the next head-unit start after its install.",
       "author": "7amoody1985",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "uninstallable": true,
       "mguHmi": [
         "ID7"
